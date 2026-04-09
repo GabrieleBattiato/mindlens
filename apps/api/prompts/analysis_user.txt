@@ -1,0 +1,5 @@
+Mode: {{MODE}}
+
+{{CONTENT}}
+
+Analyze the above and respond with a JSON object matching the specified schema. Output ONLY the JSON object, nothing else.
