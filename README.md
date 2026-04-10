@@ -2,11 +2,19 @@
 
 **A local tool for understanding what you think and why you think it.**
 
+This is a personal project I decided to share.
+I was already doing CBT exercises on paper, but I wanted a more comfortable and structured way to work through them — something that could keep a history, help me notice patterns over time, and make use of modern AI tools to support the process when useful.
+
+This isn't meant to be a professional tool or a polished product.
+It's simply a practical, visual way to do the exercises.
+
+You do the work — the tool helps you see it more clearly.
+
 MindLens is not a therapy chatbot, not a journal, not a motivational coach. It's a **cognitive lens**: it helps you look at your thoughts more clearly, question them, and uncover the distortions and underlying beliefs shaping how you feel and react. Instead of telling you what to think, it shows you how your thinking works.
 
 It uses AI models that run **100% on your machine** (via [Ollama](https://ollama.com)) — nothing leaves your computer. Your data stays in a local SQLite file. No accounts, no servers, no telemetry.
 
-> **Disclaimer:** MindLens is a self-exploration tool based on Cognitive Behavioral Therapy (CBT) concepts. It does not replace professional mental health care. If you are going through a crisis, please seek professional help.
+> **Disclaimer:** MindLens is a self-exploration tool based on Cognitive Behavioral Therapy (CBT) concepts. It is not a professional or clinical tool in any way. It does not replace professional mental health care. If you are going through a crisis, please seek professional help.
 
 ---
 
