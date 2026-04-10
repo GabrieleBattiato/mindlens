@@ -50,6 +50,7 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
 export interface AnalysisCreateFree {
   input_mode: "free";
   raw_input: string;
+  locale?: "es" | "en";
 }
 
 export interface AnalysisCreateGuided {
@@ -59,6 +60,7 @@ export interface AnalysisCreateGuided {
   emotions: string;
   intensity: number;
   behaviors?: string;
+  locale?: "es" | "en";
 }
 
 export type AnalysisCreate = AnalysisCreateFree | AnalysisCreateGuided;

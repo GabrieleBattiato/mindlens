@@ -19,7 +19,7 @@ type TFn = (key: TranslationKey) => string;
 // ─── Utilities ───────────────────────────────────────────────────────────────
 
 function formatDate(dateStr: string): string {
-  return new Date(dateStr).toLocaleDateString("es-AR", {
+  return new Date(dateStr).toLocaleDateString(undefined, {
     day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit",
   });
 }
@@ -537,9 +537,9 @@ export default function AnalysisResultPage() {
   const handleReanalyze = useCallback(async (additionalContext: string) => {
     if (!analysis) return;
     const combined = `${analysis.raw_input}\n\n---\nContexto adicional:\n${additionalContext}`;
-    const newAnalysis = await createAnalysis({ input_mode: "free", raw_input: combined });
+    const newAnalysis = await createAnalysis({ input_mode: "free", raw_input: combined, locale });
     router.push(`/analysis/${newAnalysis.id}`);
-  }, [analysis, router]);
+  }, [analysis, router, locale]);
 
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
 

@@ -40,6 +40,7 @@ async def create_analysis(
         analysis = Analysis(
             input_mode="free",
             raw_input=data.raw_input,
+            locale=data.locale,
             status="processing",
         )
     else:
@@ -58,6 +59,7 @@ async def create_analysis(
             guided_emotions=data.emotions,
             guided_intensity=data.intensity,
             guided_behaviors=data.behaviors,
+            locale=data.locale,
             status="processing",
         )
 
@@ -73,7 +75,7 @@ async def run_analysis(analysis_id: str, provider: LLMProvider) -> None:
         analysis = await get_analysis(db, analysis_id)
 
         # Build prompts
-        system_prompt = prompt_builder.build_system_prompt(strict=False)
+        system_prompt = prompt_builder.build_system_prompt(strict=False, locale=analysis.locale)
         if analysis.input_mode == "free":
             user_prompt = prompt_builder.build_user_prompt(
                 mode="free",
@@ -95,7 +97,7 @@ async def run_analysis(analysis_id: str, provider: LLMProvider) -> None:
 
         if result is None:
             logger.info("First attempt failed for analysis %s, retrying with strict prompt", analysis.id)
-            result = await _retry_strict(provider, user_prompt)
+            result = await _retry_strict(provider, user_prompt, locale=analysis.locale)
 
         elapsed = round(time.monotonic() - t0, 2)
         analysis.model_used = settings.ollama_model
@@ -140,9 +142,10 @@ async def _call_and_parse(
 async def _retry_strict(
     provider: LLMProvider,
     original_user_prompt: str,
+    locale: str = "es",
 ) -> LLMAnalysisResponse | None:
     """Retry with strict system prompt and error context appended."""
-    strict_system = prompt_builder.build_system_prompt(strict=True)
+    strict_system = prompt_builder.build_system_prompt(strict=True, locale=locale)
     retry_user = (
         original_user_prompt
         + "\n\n[RETRY] Your previous response could not be parsed. "

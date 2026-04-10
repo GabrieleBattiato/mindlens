@@ -169,7 +169,7 @@ function HelpModal({ t, onClose }: { t: (key: TranslationKey) => string; onClose
 }
 
 export function ABCDEExerciseContent() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const router = useRouter();
   const searchParams = useSearchParams();
   const analysisId = searchParams.get("analysisId");
@@ -339,7 +339,7 @@ export function ABCDEExerciseContent() {
         values.new_feeling.trim() ? `Nuevo sentimiento (F): ${values.new_feeling.trim()}` : null,
       ].filter(Boolean).join("\n\n");
 
-      const analysis = await createAnalysis({ input_mode: "free", raw_input: parts });
+      const analysis = await createAnalysis({ input_mode: "free", raw_input: parts, locale });
       router.push(`/analysis/${analysis.id}`);
     } catch (err) {
       toast.error(

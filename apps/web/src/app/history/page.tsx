@@ -18,7 +18,7 @@ function truncate(text: string, maxLen: number): string {
 }
 
 function formatDate(dateStr: string): string {
-  return new Date(dateStr).toLocaleDateString("es-AR", {
+  return new Date(dateStr).toLocaleDateString(undefined, {
     day: "numeric",
     month: "long",
     year: "numeric",

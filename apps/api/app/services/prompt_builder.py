@@ -11,10 +11,14 @@ class PromptBuilder:
             self._cache[name] = path.read_text()
         return self._cache[name]
 
-    def build_system_prompt(self, strict: bool = False) -> str:
-        if strict:
-            return self._load_template("analysis_system_strict.txt")
-        return self._load_template("analysis_system.txt")
+    _LANG_LABELS = {"es": "Spanish (Latin American)", "en": "English"}
+
+    def build_system_prompt(self, strict: bool = False, locale: str = "es") -> str:
+        template = self._load_template(
+            "analysis_system_strict.txt" if strict else "analysis_system.txt"
+        )
+        lang = self._LANG_LABELS.get(locale, "Spanish (Latin American)")
+        return template.replace("{{LANGUAGE}}", lang)
 
     def build_user_prompt(
         self,

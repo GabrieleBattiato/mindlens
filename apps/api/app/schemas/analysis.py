@@ -6,6 +6,7 @@ from pydantic import BaseModel, Field
 class AnalysisCreateFreeMode(BaseModel):
     input_mode: Literal["free"] = "free"
     raw_input: str = Field(min_length=10, max_length=5000)
+    locale: Literal["es", "en"] = "es"
 
 
 class AnalysisCreateGuidedMode(BaseModel):
@@ -15,6 +16,7 @@ class AnalysisCreateGuidedMode(BaseModel):
     emotions: str = Field(min_length=3)
     intensity: int = Field(ge=1, le=10)
     behaviors: str | None = None
+    locale: Literal["es", "en"] = "es"
 
 
 AnalysisCreate = Annotated[

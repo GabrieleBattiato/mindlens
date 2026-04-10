@@ -101,7 +101,15 @@ ollama serve
 ollama pull qwen3:8b
 ```
 
-### 3. API
+### 3. Configure (optional)
+
+```bash
+cp .env.example apps/api/.env
+```
+
+Edit `apps/api/.env` if you want to change the model, Ollama URL, or other settings. Without this file, defaults are used.
+
+### 4. API
 
 ```bash
 cd apps/api
@@ -111,7 +119,7 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload --port 4000
 ```
 
-### 4. Web
+### 5. Web
 
 ```bash
 cd apps/web
@@ -120,7 +128,7 @@ npm run build
 npm start -- --port 4001
 ```
 
-### 5. Open the app
+### 6. Open the app
 
 Go to [http://localhost:4001](http://localhost:4001)
 
@@ -146,7 +154,7 @@ Any model that runs on Ollama should work. The quality of the result depends on 
 
 ## Languages
 
-The interface is available in **Spanish** and **English**. You can switch languages from the **Settings** page. AI output is always generated in Spanish.
+The interface is available in **Spanish** and **English**. You can switch languages from the **Settings** page. AI output is generated in the language you have selected.
 
 ---
 

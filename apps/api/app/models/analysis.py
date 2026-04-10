@@ -27,6 +27,7 @@ class Analysis(Base):
     status: Mapped[str] = mapped_column(String(20), default="pending")
     result_json: Mapped[str | None] = mapped_column(Text, nullable=True)
     error_message: Mapped[str | None] = mapped_column(Text, nullable=True)
+    locale: Mapped[str] = mapped_column(String(5), default="es")
     model_used: Mapped[str | None] = mapped_column(String(100), nullable=True)
     duration_seconds: Mapped[float | None] = mapped_column(Float, nullable=True)
 
