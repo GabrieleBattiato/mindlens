@@ -3,8 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -49,6 +47,11 @@ function StatusBadge({ status }: { status: AnalysisResponse["status"] }) {
       label: t("history.statusPending"),
       classes:
         "bg-gradient-to-r from-zinc-500/20 to-slate-500/20 text-zinc-300 border-zinc-500/30",
+    },
+    cancelled: {
+      label: t("history.statusCancelled"),
+      classes:
+        "bg-gradient-to-r from-zinc-500/20 to-slate-500/20 text-zinc-400 border-zinc-500/30",
     },
   } as const;
 
@@ -273,7 +276,7 @@ export default function HistoryPage() {
               {/* Action buttons */}
               <div className="absolute bottom-5 right-5 flex items-center gap-1">
                 {/* Re-analyze */}
-                {(a.status === "completed" || a.status === "failed") && (
+                {(a.status === "completed" || a.status === "failed" || a.status === "cancelled") && (
                   <button
                     type="button"
                     onClick={(e) => { e.stopPropagation(); handleRetry(a.id); }}

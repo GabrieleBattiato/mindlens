@@ -331,12 +331,12 @@ export function ABCDEExerciseContent() {
 
       // Synthesize ABCDE into raw_input and trigger analysis
       const parts = [
-        `Evento activador (A): ${values.activating_event.trim()}`,
-        `Creencia automática (B): ${values.belief.trim()}`,
-        `Consecuencias (C): ${values.consequence.trim()}`,
-        values.disputation.trim() ? `Disputa (D): ${values.disputation.trim()}` : null,
-        values.effective_new_belief.trim() ? `Nueva creencia (E): ${values.effective_new_belief.trim()}` : null,
-        values.new_feeling.trim() ? `Nuevo sentimiento (F): ${values.new_feeling.trim()}` : null,
+        `${t("exercise.synthesis.a")}: ${values.activating_event.trim()}`,
+        `${t("exercise.synthesis.b")}: ${values.belief.trim()}`,
+        `${t("exercise.synthesis.c")}: ${values.consequence.trim()}`,
+        values.disputation.trim() ? `${t("exercise.synthesis.d")}: ${values.disputation.trim()}` : null,
+        values.effective_new_belief.trim() ? `${t("exercise.synthesis.e")}: ${values.effective_new_belief.trim()}` : null,
+        values.new_feeling.trim() ? `${t("exercise.synthesis.f")}: ${values.new_feeling.trim()}` : null,
       ].filter(Boolean).join("\n\n");
 
       const analysis = await createAnalysis({ input_mode: "free", raw_input: parts, locale });

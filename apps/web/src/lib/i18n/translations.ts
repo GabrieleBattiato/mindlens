@@ -7,10 +7,10 @@ export const translations = {
     // Home
     "home.title": "MindLens",
     "home.subtitle":
-      "Examina tus pensamientos, identifica distorsiones cognitivas y construi creencias mas saludables con ejercicios guiados.",
+      "Examina tus pensamientos, identifica distorsiones cognitivas y construye creencias mas saludables con ejercicios guiados.",
     "home.abcdef": "Ejercicio ABC",
     "home.abcdefDesc":
-      "Reestructuracion cognitiva paso a paso, sin IA. Vos guias el proceso.",
+      "Reestructuracion cognitiva paso a paso, sin IA. Tu guias el proceso.",
     "home.history": "Ver Historial",
     "home.historyDesc":
       "Revisa tus registros anteriores, observa patrones y tu progreso.",
@@ -67,7 +67,7 @@ export const translations = {
     "learn.distortions.overgeneralizationEx": "'Siempre me pasa lo mismo' | 'Nunca me sale nada bien'",
     "learn.distortions.mentalFilter": "Filtro mental",
     "learn.distortions.mentalFilterDesc": "Enfocarse exclusivamente en los detalles negativos e ignorar los positivos.",
-    "learn.distortions.mentalFilterEx": "Recibis 10 comentarios positivos y 1 negativo, y solo pensas en el negativo.",
+    "learn.distortions.mentalFilterEx": "Recibes 10 comentarios positivos y 1 negativo, y solo piensas en el negativo.",
     "learn.distortions.discountingPositives": "Descalificar lo positivo",
     "learn.distortions.discountingPositivesDesc": "Insistir en que los logros o momentos positivos 'no cuentan'.",
     "learn.distortions.discountingPositivesEx": "'Me fue bien en la entrevista pero fue suerte' | 'Cualquiera podria haber hecho eso'",
@@ -97,7 +97,7 @@ export const translations = {
     "learn.distortions.personalizationEx": "'Es mi culpa que el equipo haya perdido' | 'Si no fuera por el, yo estaria bien'",
     "learn.distortions.alwaysBeingRight": "Siempre tener razon",
     "learn.distortions.alwaysBeingRightDesc": "Verse como arbitro de la verdad, donde estar equivocado es inaceptable — a menudo genera conflictos en las relaciones.",
-    "learn.distortions.alwaysBeingRightEx": "Discutir hasta el cansancio solo para demostrar que tenes razon, sin importar el costo emocional.",
+    "learn.distortions.alwaysBeingRightEx": "Discutir hasta el cansancio solo para demostrar que tienes razon, sin importar el costo emocional.",
     "learn.distortions.magicalThinking": "Pensamiento magico",
     "learn.distortions.magicalThinkingDesc": "Creer que los pensamientos, acciones o emociones influyen en situaciones que no tienen relacion.",
     "learn.distortions.magicalThinkingEx": "'Si pienso que algo malo va a pasar, va a pasar' | 'Si no toco madera, me va a ir mal'",
@@ -114,13 +114,13 @@ export const translations = {
 
     "learn.why.title": "Por que funciona",
     "learn.why.p1":
-      "Imagina que cada vez que algo te afecta, tu cerebro sigue un camino automatico: situacion → pensamiento → emocion. Ese camino se armo con los anos, a base de experiencias, y muchas veces es util. Pero a veces el camino te lleva a conclusiones que no se sostienen cuando las miras con mas calma.",
+      "Imagina que cada vez que algo te afecta, tu cerebro sigue un camino automatico: situacion → pensamiento → emocion. Ese camino se formo con los anos, a base de experiencias, y muchas veces es util. Pero a veces te lleva a conclusiones que no se sostienen cuando las miras con mas calma.",
     "learn.why.p2":
       "La CBT no te pide que dejes de sentir ni que 'pienses positivo'. Lo que hace es ayudarte a pausar en el medio de ese camino automatico — entre lo que paso y lo que sentiste — y preguntarte: lo que pense, se sostiene con evidencia? hay otra forma de verlo?",
     "learn.why.p3":
       "No es que los pensamientos automaticos sean 'malos'. Son rapidos, y por eso a veces simplifican demasiado. La CBT te entrena para detectar cuando esa simplificacion te esta costando mas de lo que te ayuda.",
     "learn.why.p4":
-      "Con practica, empezas a notar patrones: 'ah, otra vez estoy asumiendo lo peor', 'otra vez estoy leyendo la mente del otro'. No desaparecen, pero dejan de manejarte. Empezas a elegir como responder en vez de solo reaccionar.",
+      "Con practica, empiezas a notar patrones: 'ah, otra vez estoy asumiendo lo peor', 'otra vez estoy leyendo la mente del otro'. No desaparecen, pero dejan de manejarte. Empiezas a elegir como responder en vez de solo reaccionar.",
     "learn.why.p5":
       "La evidencia cientifica respalda este enfoque. La CBT es una de las terapias mas estudiadas del mundo y ha demostrado eficacia para ansiedad, depresion, estres, y muchas otras condiciones. No porque sea magica, sino porque entrena una habilidad concreta: mirar tus propios pensamientos con distancia y curiosidad.",
     "learn.ctaExercise": "Hacer un ejercicio ABC",
@@ -128,12 +128,12 @@ export const translations = {
     // About
     "about.title": "Sobre este proyecto",
     "about.p1":
-      "MindLens es un proyecto personal que quise compartir. No pretende reemplazar nada ni ser la solucion definitiva. Lo que hace es darte una forma practica y visual de hacer los ejercicios, con un modelo de IA local que te ayuda a identificar distorsiones, separar hechos de interpretaciones y elaborar las disputas si lo necesitas. El trabajo lo haces vos — la herramienta te acompana, te ayuda a mantener trazabilidad, y te da estructura para ver con mas claridad.",
+      "MindLens es un proyecto personal que quise compartir. No pretende reemplazar nada ni ser la solucion definitiva. Lo que hace es darte una forma practica y visual de hacer los ejercicios, con un modelo de IA local que te ayuda a identificar distorsiones, separar hechos de interpretaciones y elaborar las disputas si lo necesitas. El trabajo lo haces tu — la herramienta te acompana, te ayuda a mantener trazabilidad, y te da estructura para ver con mas claridad.",
     "about.modelQuality.title": "Sobre el modelo de IA",
     "about.modelQuality.p1":
       "La calidad del resultado depende en gran parte del modelo que elijas usar. Modelos mas grandes (13B+) tienden a producir resultados mas precisos y matizados, mientras que modelos mas chicos son mas rapidos pero pueden ser menos detallados.",
     "about.modelQuality.p2":
-      "Podes cambiar el modelo en cualquier momento desde Configuracion. Si un resultado no te convence, podes reprocesarlo desde el Historial con otro modelo para comparar.",
+      "Puedes cambiar el modelo en cualquier momento desde Configuracion. Si un resultado no te convence, puedes reprocesarlo desde el Historial con otro modelo para comparar.",
     "about.disclaimer":
       "MindLens es una herramienta de autoexploracion basada en conceptos de terapia cognitivo-conductual. No reemplaza la atencion profesional de salud mental. Si estas atravesando una crisis, busca ayuda profesional.",
 
@@ -141,28 +141,19 @@ export const translations = {
     "result.title": "Una mirada mas clara",
     "result.failed": "No se pudo procesar",
     "result.ready": "Tu resultado esta listo",
+    "result.cancel": "Cancelar",
     "result.processing.0": "Mirando mas de cerca...",
     "result.processing.1": "Notando algunos patrones...",
     "result.processing.2": "Buscando debajo de la superficie...",
     "result.processing.3": "Armando todo...",
     "result.summary": "Resumen",
-    "result.abcModel": "Modelo ABC",
-    "result.activatingEvent": "Evento Activador",
-    "result.belief": "Creencia",
-    "result.consequence": "Consecuencia",
     "result.distortions": "Distorsiones Cognitivas",
     "result.beliefAnalysis": "Creencias profundas",
     "result.coreBelief": "Creencia Central",
     "result.intermediateRules": "Reglas Intermedias",
     "result.evidenceFor": "Evidencia a Favor",
     "result.evidenceAgainst": "Evidencia en Contra",
-    "result.maintenanceCycle": "Ciclo de Mantenimiento",
-    "result.maintainingFactors": "Factores de Mantenimiento",
     "result.reframe": "Reencuadre",
-    "result.alternativeThought": "Pensamiento Alternativo",
-    "result.reasoning": "Razonamiento",
-    "result.exercises": "Ejercicios CBT",
-    "result.patterns": "Patrones Detectados",
     "result.emotions": "Emociones",
     "result.primary": "principal",
     "result.oldThought": "Pensamiento original",
@@ -175,13 +166,12 @@ export const translations = {
     "result.suggestedExercise": "Ejercicio sugerido",
     "result.moreExercises": "Mas ejercicios",
     "result.deeperAnalysis": "Profundizar",
-    "result.showMore": "Ver mas",
     "result.showLess": "Ver menos",
     "result.clarification.title": "Necesito más contexto",
-    "result.clarification.subtitle": "Respondé las preguntas que apliquen para un análisis más preciso:",
+    "result.clarification.subtitle": "Respondé las preguntas que apliquen para un resultado más preciso:",
     "result.clarification.placeholder": "Agregá el contexto que falta...",
     "result.clarification.reanalyze": "Reprocesar con contexto",
-    "result.clarification.reanalyzing": "Re-analizando...",
+    "result.clarification.reanalyzing": "Reprocesando...",
 
     // History
     "history.title": "Historial",
@@ -196,12 +186,13 @@ export const translations = {
     "history.deleted": "Registro eliminado",
     "history.deleteError": "Error al eliminar",
     "history.reanalyze": "Reprocesar",
-    "history.retryError": "No se pudo re-analizar",
+    "history.retryError": "No se pudo reprocesar",
     "history.loadError": "Error al cargar el historial",
     "history.statusCompleted": "Completado",
     "history.statusFailed": "Error",
     "history.statusProcessing": "Procesando",
     "history.statusPending": "Pendiente",
+    "history.statusCancelled": "Cancelado",
 
     // ABC Exercise
     "exercise.title": "Ejercicio ABC",
@@ -227,7 +218,7 @@ export const translations = {
     "exercise.previous": "Anterior",
     "exercise.next": "Siguiente",
     "exercise.complete": "Completar",
-    "exercise.saving": "Analizando...",
+    "exercise.saving": "Procesando...",
     "exercise.saveError": "Error al guardar el ejercicio",
     "exercise.hints": "Preguntas para guiarte",
     "exercise.a.label": "Evento Activador",
@@ -254,7 +245,7 @@ export const translations = {
     "exercise.d.desc":
       "Trata la creencia como una hipotesis. Cuestionala:",
     "exercise.d.placeholder":
-      "Escribi tu disputa aca, o usa las preguntas como guia...",
+      "Escribe tu disputa aqui, o usa las preguntas como guia...",
     "exercise.e.label": "Nueva Creencia",
     "exercise.e.desc":
       "\u00bfCual es una creencia mas equilibrada y racional?",
@@ -262,7 +253,7 @@ export const translations = {
       "Escribe un pensamiento nuevo y equilibrado...",
     "exercise.f.label": "Nuevo Sentimiento",
     "exercise.f.desc":
-      "Con esta nueva creencia, \u00bfcomo te sentis? \u00bfQue harias distinto?",
+      "Con esta nueva creencia, \u00bfcomo te sientes? \u00bfQue harias distinto?",
     "exercise.f.placeholder": "Describe la nueva emocion y conducta...",
     "exercise.hint.d1":
       "\u00bfQue evidencia concreta tengo a favor de esta creencia?",
@@ -301,12 +292,12 @@ export const translations = {
     "exercise.assist.error": "No se pudo obtener sugerencias",
     "exercise.assist.title": "Sugerencia de la IA",
     "exercise.assist.needsABC": "Completa los pasos A, B y C primero",
-    "exercise.assist.needsD": "Escribi tu propia disputa primero",
+    "exercise.assist.needsD": "Escribe tu propia disputa primero",
 
     // Settings
     "settings.title": "Configuracion",
     "settings.subtitle":
-      "Elegi el modelo de IA para procesar tus ejercicios",
+      "Elige el modelo de IA para procesar tus ejercicios",
     "settings.model": "Modelo",
     "settings.ollamaUrl": "Ollama URL",
     "settings.save": "Guardar cambios",
@@ -318,8 +309,6 @@ export const translations = {
     "settings.langEs": "Espanol",
     "settings.langEn": "English",
     "settings.ollama": "Ollama (Local)",
-    "settings.ollamaDesc":
-      "Modelo local, sin API key. Necesita Ollama corriendo.",
 
     // Appearance
     "settings.appearance": "Apariencia",
@@ -339,14 +328,15 @@ export const translations = {
       "Describe el disparador: que paso, donde, con quien. Solo los hechos, como si los contara un testigo neutral.",
     "info.exercise.b":
       "El pensamiento automatico que aparecio. Es lo que te dijiste, no lo que sentiste. Ejemplo: 'seguro piensa que soy un inutil'.",
+
     "info.exercise.c":
       "Las consecuencias de creer ese pensamiento: la emocion que sentiste y lo que hiciste como resultado.",
     "info.exercise.d":
       "Cuestiona la creencia como si fuera una hipotesis, no una verdad. Busca evidencia a favor y en contra, explora otras explicaciones.",
     "info.exercise.e":
-      "Un pensamiento mas equilibrado que reconoce lo que sentis pero incluye la evidencia completa. No es 'pensar positivo' — es pensar con mas datos.",
+      "Un pensamiento mas equilibrado que reconoce lo que sientes pero incluye la evidencia completa. No es 'pensar positivo' — es pensar con mas datos.",
     "info.exercise.f":
-      "Si pudieras creer esa nueva creencia, como te sentirias? Que harias distinto? Esto te ayuda a ver el impacto real de cambiar el pensamiento.",
+      "Si pudieras creer esa nueva creencia, \u00bfcomo te sentirias? \u00bfQue harias distinto? Esto te ayuda a ver el impacto real de cambiar el pensamiento.",
 
     // Info tooltips — dashboard
     "info.topDistortions":
@@ -354,11 +344,28 @@ export const translations = {
     "info.topEmotions":
       "Las emociones que mas se repiten en tus registros. Te ayuda a ver que estados emocionales aparecen con mayor frecuencia.",
 
-    // Info tooltips — analysis modes
-    "info.freeMode":
-      "Escribi lo que te pasa con tus palabras, sin estructura. La IA se encarga de identificar la situacion, pensamientos, emociones y todo lo demas.",
-    "info.guidedMode":
-      "Llena paso a paso cada campo: situacion, pensamientos, emociones, intensidad y conducta. Le da mas precision a la IA para analizar.",
+    // Error / Not Found
+    "error.title": "Error",
+    "error.fallback": "Algo salio mal",
+    "error.retry": "Intentar de nuevo",
+    "notFound.message": "Pagina no encontrada",
+    "notFound.back": "Volver al inicio",
+
+    // Model health indicator
+    "model.checking": "Verificando modelo...",
+    "model.notFound": "Modelo no encontrado:",
+    "model.ollamaDown": "Ollama no disponible",
+
+    // Misc
+    "common.close": "Cerrar",
+
+    // Exercise synthesis labels (sent to API)
+    "exercise.synthesis.a": "Evento activador (A)",
+    "exercise.synthesis.b": "Creencia automatica (B)",
+    "exercise.synthesis.c": "Consecuencias (C)",
+    "exercise.synthesis.d": "Disputa (D)",
+    "exercise.synthesis.e": "Nueva creencia (E)",
+    "exercise.synthesis.f": "Nuevo sentimiento (F)",
 
   },
   en: {
@@ -503,28 +510,19 @@ export const translations = {
     "result.title": "A clearer view",
     "result.failed": "Could not process",
     "result.ready": "Your result is ready",
+    "result.cancel": "Cancel",
     "result.processing.0": "Taking a closer look...",
     "result.processing.1": "Noticing some patterns...",
     "result.processing.2": "Looking beneath the surface...",
     "result.processing.3": "Putting it all together...",
     "result.summary": "Summary",
-    "result.abcModel": "ABC Model",
-    "result.activatingEvent": "Activating Event",
-    "result.belief": "Belief",
-    "result.consequence": "Consequence",
     "result.distortions": "Cognitive Distortions",
     "result.beliefAnalysis": "Deep beliefs",
     "result.coreBelief": "Core Belief",
     "result.intermediateRules": "Intermediate Rules",
     "result.evidenceFor": "Evidence For",
     "result.evidenceAgainst": "Evidence Against",
-    "result.maintenanceCycle": "Maintenance Cycle",
-    "result.maintainingFactors": "Maintaining Factors",
     "result.reframe": "Reframe",
-    "result.alternativeThought": "Alternative Thought",
-    "result.reasoning": "Reasoning",
-    "result.exercises": "CBT Exercises",
-    "result.patterns": "Detected Patterns",
     "result.emotions": "Emotions",
     "result.primary": "primary",
     "result.oldThought": "Original thought",
@@ -537,13 +535,12 @@ export const translations = {
     "result.suggestedExercise": "Suggested exercise",
     "result.moreExercises": "More exercises",
     "result.deeperAnalysis": "Go deeper",
-    "result.showMore": "Show more",
     "result.showLess": "Show less",
     "result.clarification.title": "I need more context",
     "result.clarification.subtitle": "Answer the questions below for a more accurate result:",
     "result.clarification.placeholder": "Add the missing context...",
     "result.clarification.reanalyze": "Reprocess with context",
-    "result.clarification.reanalyzing": "Re-analyzing...",
+    "result.clarification.reanalyzing": "Reprocessing...",
 
     // History
     "history.title": "History",
@@ -558,12 +555,13 @@ export const translations = {
     "history.deleted": "Entry deleted",
     "history.deleteError": "Error deleting",
     "history.reanalyze": "Reprocess",
-    "history.retryError": "Could not re-analyze",
+    "history.retryError": "Could not reprocess",
     "history.loadError": "Error loading history",
     "history.statusCompleted": "Completed",
     "history.statusFailed": "Failed",
     "history.statusProcessing": "Processing",
     "history.statusPending": "Pending",
+    "history.statusCancelled": "Cancelled",
 
     // ABC Exercise
     "exercise.title": "ABC Exercise",
@@ -589,7 +587,7 @@ export const translations = {
     "exercise.previous": "Previous",
     "exercise.next": "Next",
     "exercise.complete": "Complete",
-    "exercise.saving": "Analyzing...",
+    "exercise.saving": "Processing...",
     "exercise.saveError": "Error saving exercise",
     "exercise.hints": "Guiding questions",
     "exercise.a.label": "Activating Event",
@@ -666,8 +664,6 @@ export const translations = {
     "settings.langEs": "Espanol",
     "settings.langEn": "English",
     "settings.ollama": "Ollama (Local)",
-    "settings.ollamaDesc":
-      "Local model, no API key needed. Requires Ollama running.",
 
     // Appearance
     "settings.appearance": "Appearance",
@@ -702,11 +698,28 @@ export const translations = {
     "info.topEmotions":
       "The emotions that repeat most across your entries. Helps you see which emotional states come up most frequently.",
 
-    // Info tooltips — analysis modes
-    "info.freeMode":
-      "Write what's going on in your own words, no structure needed. The AI handles identifying the situation, thoughts, emotions, and everything else.",
-    "info.guidedMode":
-      "Fill in each field step by step: situation, thoughts, emotions, intensity, and behavior. Gives the AI more precision when processing.",
+    // Error / Not Found
+    "error.title": "Error",
+    "error.fallback": "Something went wrong",
+    "error.retry": "Try again",
+    "notFound.message": "Page not found",
+    "notFound.back": "Back to home",
+
+    // Model health indicator
+    "model.checking": "Checking model...",
+    "model.notFound": "Model not found:",
+    "model.ollamaDown": "Ollama not running",
+
+    // Misc
+    "common.close": "Close",
+
+    // Exercise synthesis labels (sent to API)
+    "exercise.synthesis.a": "Activating event (A)",
+    "exercise.synthesis.b": "Automatic belief (B)",
+    "exercise.synthesis.c": "Consequences (C)",
+    "exercise.synthesis.d": "Disputation (D)",
+    "exercise.synthesis.e": "New belief (E)",
+    "exercise.synthesis.f": "New feeling (F)",
 
   },
 } as const;

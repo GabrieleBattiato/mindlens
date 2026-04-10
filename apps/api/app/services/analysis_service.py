@@ -100,6 +100,13 @@ async def run_analysis(analysis_id: str, provider: LLMProvider) -> None:
             result = await _retry_strict(provider, user_prompt, locale=analysis.locale)
 
         elapsed = round(time.monotonic() - t0, 2)
+
+        # Re-fetch to check if cancelled while LLM was running
+        await db.refresh(analysis)
+        if analysis.status == "cancelled":
+            logger.info("Analysis %s was cancelled, discarding result", analysis.id)
+            return
+
         analysis.model_used = settings.ollama_model
         analysis.duration_seconds = elapsed
 
@@ -169,11 +176,6 @@ async def retry_analysis(
     await db.commit()
     await db.refresh(analysis)
     return analysis
-
-
-async def run_retry(analysis_id: str, provider: LLMProvider) -> None:
-    """Run retry in background — same logic as run_analysis."""
-    await run_analysis(analysis_id, provider)
 
 
 async def get_analysis(db: AsyncSession, analysis_id: str) -> Analysis:

@@ -11,11 +11,11 @@ class AnalysisCreateFreeMode(BaseModel):
 
 class AnalysisCreateGuidedMode(BaseModel):
     input_mode: Literal["guided"] = "guided"
-    situation: str = Field(min_length=5)
-    thoughts: str = Field(min_length=5)
-    emotions: str = Field(min_length=3)
+    situation: str = Field(min_length=5, max_length=5000)
+    thoughts: str = Field(min_length=5, max_length=5000)
+    emotions: str = Field(min_length=3, max_length=2000)
     intensity: int = Field(ge=1, le=10)
-    behaviors: str | None = None
+    behaviors: str | None = Field(None, max_length=2000)
     locale: Literal["es", "en"] = "es"
 
 
@@ -41,5 +41,6 @@ class AnalysisResponse(BaseModel):
     error_message: str | None = None
     model_used: str | None = None
     duration_seconds: float | None = None
+    locale: str = "es"
 
     model_config = {"from_attributes": True}

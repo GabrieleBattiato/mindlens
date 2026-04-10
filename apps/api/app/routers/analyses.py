@@ -49,6 +49,7 @@ def _to_response(analysis: Analysis) -> AnalysisResponse:
         error_message=analysis.error_message,
         model_used=analysis.model_used,
         duration_seconds=analysis.duration_seconds,
+        locale=analysis.locale,
     )
 
 
@@ -102,6 +103,19 @@ async def retry_analysis_endpoint(
 ):
     analysis = await retry_analysis(db, analysis_id, provider)
     background_tasks.add_task(run_analysis, analysis.id, provider)
+    return _to_response(analysis)
+
+
+@router.post("/{analysis_id}/cancel", response_model=AnalysisResponse)
+async def cancel_analysis_endpoint(
+    analysis_id: str,
+    db: AsyncSession = Depends(get_db),
+):
+    analysis = await get_analysis(db, analysis_id)
+    if analysis.status in ("processing", "pending"):
+        analysis.status = "cancelled"
+        await db.commit()
+        await db.refresh(analysis)
     return _to_response(analysis)
 
 

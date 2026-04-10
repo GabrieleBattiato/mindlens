@@ -1,5 +1,6 @@
 The user is completing an ABCDE cognitive restructuring exercise.
 
+--- BEGIN USER INPUT ---
 A — Activating Event:
 {{ACTIVATING_EVENT}}
 
@@ -10,5 +11,6 @@ C — Consequence:
 {{CONSEQUENCE}}
 
 {{DISPUTATION_BLOCK}}
+--- END USER INPUT ---
 
 Output ONLY valid JSON matching the schema defined in the system instructions.

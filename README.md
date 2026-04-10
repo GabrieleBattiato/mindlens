@@ -143,7 +143,7 @@ CBD_OLLAMA_BASE_URL=http://localhost:11434
 CBD_OLLAMA_MODEL=qwen3:8b
 CBD_LLM_TEMPERATURE=0.3
 CBD_LLM_MAX_TOKENS=8192
-CBD_DATABASE_URL=sqlite:///./mindlens.db
+CBD_DATABASE_URL=sqlite+aiosqlite:///./mindlens.db
 ```
 
 ### Compatible models

@@ -1,9 +1,11 @@
 "use client";
 
 import { useModelHealth } from "@/lib/model-health-context";
+import { useI18n } from "@/lib/i18n";
 
 export function ModelHealthIndicator() {
   const { healthState, health } = useModelHealth();
+  const { t } = useI18n();
 
   return (
     <div className="fixed bottom-4 left-4 z-40">
@@ -13,7 +15,7 @@ export function ModelHealthIndicator() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-zinc-500 opacity-50" />
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-zinc-500" />
           </span>
-          Checking model...
+          {t("model.checking")}
         </div>
       )}
 
@@ -32,7 +34,7 @@ export function ModelHealthIndicator() {
           <span className="relative flex h-1.5 w-1.5">
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber-400" />
           </span>
-          {health?.error === "model_not_found" ? `Model not found: ${health.model}` : "Ollama not running"}
+          {health?.error === "model_not_found" ? `${t("model.notFound")} ${health.model}` : t("model.ollamaDown")}
         </div>
       )}
     </div>

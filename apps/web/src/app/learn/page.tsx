@@ -222,7 +222,7 @@ type TFn = (key: import("@/lib/i18n").TranslationKey) => string;
 
 interface Distortion { name: string; desc: string; ex: string }
 
-function DistortionOverlay({ d, onClose }: { d: Distortion; onClose: () => void }) {
+function DistortionOverlay({ d, onClose, t }: { d: Distortion; onClose: () => void; t: TFn }) {
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
@@ -247,7 +247,7 @@ function DistortionOverlay({ d, onClose }: { d: Distortion; onClose: () => void 
           onClick={onClose}
           className="mt-4 w-full rounded-xl bg-white/5 py-2 text-xs font-medium text-zinc-500 transition-colors hover:bg-white/10 hover:text-zinc-300"
         >
-          Cerrar
+          {t("common.close")}
         </button>
       </div>
     </div>
@@ -288,7 +288,7 @@ function DistortionGrid({ t }: { t: TFn }) {
           </button>
         ))}
       </div>
-      {selected && <DistortionOverlay d={selected} onClose={() => setSelected(null)} />}
+      {selected && <DistortionOverlay d={selected} onClose={() => setSelected(null)} t={t} />}
     </>
   );
 }

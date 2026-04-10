@@ -19,7 +19,7 @@ class ProviderInfo(BaseModel):
 
 class ProviderUpdate(BaseModel):
     model: str | None = None
-    ollama_base_url: str | None = Field(None, pattern=r"^https?://")
+    ollama_base_url: str | None = Field(None, pattern=r"^https?://[^\s<>\"']+$")
 
 
 @router.get("", response_model=ProviderInfo)

@@ -2,16 +2,15 @@
 
 import { useEffect, useState, useCallback, useRef } from "react";
 import { useParams, useRouter } from "next/navigation";
-import Link from "next/link";
 
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { getAnalysis, getExercises, createAnalysis } from "@/lib/api";
+import { getAnalysis, createAnalysis, cancelAnalysis } from "@/lib/api";
 import { useI18n } from "@/lib/i18n";
 import { formatLabel } from "@/lib/distortion-labels";
-import type { AnalysisResponse, ExerciseResponse, LLMAnalysisResult } from "@/lib/types";
+import type { AnalysisResponse, LLMAnalysisResult } from "@/lib/types";
 import type { TranslationKey, Locale } from "@/lib/i18n";
 
 type TFn = (key: TranslationKey) => string;
@@ -502,7 +501,7 @@ const PROCESSING_KEYS = [
   "result.processing.3",
 ] as const;
 
-function ProcessingSpinner({ t }: { t: TFn }) {
+function ProcessingSpinner({ t, onCancel }: { t: TFn; onCancel: () => void }) {
   const [msgIdx, setMsgIdx] = useState(0);
 
   useEffect(() => {
@@ -518,6 +517,13 @@ function ProcessingSpinner({ t }: { t: TFn }) {
       <p className="text-sm text-zinc-400 transition-opacity duration-300">
         {t(PROCESSING_KEYS[msgIdx])}
       </p>
+      <button
+        type="button"
+        onClick={onCancel}
+        className="mt-6 text-xs text-zinc-600 transition-colors hover:text-zinc-400"
+      >
+        {t("result.cancel")}
+      </button>
     </div>
   );
 }
@@ -530,7 +536,6 @@ export default function AnalysisResultPage() {
   const { t, locale } = useI18n();
 
   const [analysis, setAnalysis] = useState<AnalysisResponse | null>(null);
-  const [exercises, setExercises] = useState<ExerciseResponse[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -547,9 +552,9 @@ export default function AnalysisResultPage() {
   useEffect(() => {
     if (!id) return;
     let cancelled = false;
-    Promise.all([getAnalysis(id), getExercises(id)])
-      .then(([data, exs]) => {
-        if (!cancelled) { setAnalysis(data); setExercises(exs); }
+    getAnalysis(id)
+      .then((data) => {
+        if (!cancelled) { setAnalysis(data); }
       })
       .catch((err) => {
         if (!cancelled) setError(err instanceof Error ? err.message : t("result.failed"));
@@ -620,10 +625,17 @@ export default function AnalysisResultPage() {
           <h1 className="text-3xl font-bold"><span className="gradient-text">{t("result.title")}</span></h1>
           <p className="mt-2 text-sm text-zinc-400">{formatDate(analysis.created_at)}</p>
         </div>
-        <ProcessingSpinner t={t} />
+        <ProcessingSpinner
+          t={t}
+          onCancel={async () => {
+            await cancelAnalysis(analysis.id);
+            router.push("/history");
+          }}
+        />
       </div>
     );
   }
+
 
   const result = analysis.result_json;
   if (!result) return null;
