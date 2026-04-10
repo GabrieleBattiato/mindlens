@@ -39,6 +39,9 @@ Thumbs.db
 .agents/
 skills-lock.json
 
+# Dev scripts
+dev.sh
+
 # Misc
 *.log
 *.pid

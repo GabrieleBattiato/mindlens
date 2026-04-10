@@ -1,6 +1,6 @@
 # MindLens
 
-Local CBT self-registration and cognitive analysis tool. Not a therapy chatbot, not a generic journal — a **cognitive lens**: structured, sober, precise.
+Local CBT self-registration and cognitive exploration tool. Not a therapy chatbot, not a generic journal — a **cognitive lens**: structured, sober, precise.
 
 ## Stack
 
@@ -10,18 +10,28 @@ Local CBT self-registration and cognitive analysis tool. Not a therapy chatbot, 
 
 ## Running the project
 
-```bash
-./dev.sh
-```
-
-This starts the API (port 8000) and the web app (port 3000). Requires Ollama running separately:
+Requires Ollama running separately:
 
 ```bash
 ollama serve
-ollama pull qwen3:4b
+ollama pull qwen3:8b
 ```
 
-For manual setup see README.md.
+### API (terminal 1)
+```bash
+cd apps/api
+source .venv/bin/activate
+uvicorn app.main:app --reload --port 4000
+```
+
+### Web (terminal 2)
+```bash
+cd apps/web
+npm run build
+npm start -- --port 4001
+```
+
+Open [http://localhost:4001](http://localhost:4001)
 
 ## Structure
 
@@ -33,17 +43,18 @@ apps/
   web/            → Next.js app
     src/app/      → Pages (App Router)
     src/components/ → UI components
-    src/lib/      → API client, types, i18n, utils, distortion-labels
+    src/lib/      → API client, types, i18n, utils, theme, distortion-labels
 ```
 
 ## Pages
 
 - `/` — Dashboard: stats, top distortions/emotions, action cards
-- `/exercise/abcde` — Primary entry point: step-by-step ABCDE exercise → triggers AI analysis on completion
-- `/analysis/[id]` — Configurable result cards: summary, emotions, distortions, ABC, fact vs interpretation, reframe, beliefs, maintenance cycle, patterns, exercises
-- `/learn` — Educational section: CBT, ABC model, distortions
-- `/history` — Past analyses with filters and deletion
-- `/settings` — Language (ES/EN), Ollama model, URL, theme
+- `/exercise/abcde` — Primary entry point: step-by-step ABC exercise → triggers background AI processing on completion
+- `/analysis/[id]` — Result view: insight hero with summary + pattern chips, core insights (emotions, distortions, reframe), cognitive process flow, maintenance cycle, suggested exercises, collapsible deep beliefs
+- `/learn` — Educational section: CBT, ABC model, distortions, why it works
+- `/history` — Past entries with re-process and deletion
+- `/settings` — Language (ES/EN), Ollama model, URL, visual theme
+- `/about` — About the project, model quality note, disclaimer
 
 ## Conventions
 
@@ -53,6 +64,9 @@ apps/
 - **i18n:** ES/EN via `src/lib/i18n/translations.ts`. Language selector in Settings.
 - **Icons:** lucide-react (no unicode).
 - **App tone:** clinical, sober, precise. No blind validation, no diagnoses, no empty motivational phrases. Distinguish fact vs interpretation, thought vs emotion.
+- **Terminology:** avoid "analysis" in user-facing text. Use "entries", "result", "reprocess" instead.
 - **LLM JSON contract:** defined in `apps/api/app/schemas/llm_response.py`. All LLM output is validated against this schema.
 - **Provider layer:** Protocol-based (`providers/base.py`). Provider returns raw string, parsing in service layer.
 - **Prompts:** all prompt files in `apps/api/prompts/` are written in English. The LLM is instructed within each prompt to output content in Spanish (Latin American).
+- **Background processing:** LLM runs in FastAPI BackgroundTasks. Frontend polls every 3s. Browser notification on completion.
+- **Commits:** never include Co-Authored-By or AI attribution.

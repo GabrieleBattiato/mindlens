@@ -547,7 +547,6 @@ export default function AnalysisResultPage() {
   useEffect(() => {
     if (!id) return;
     let cancelled = false;
-    setLoading(true);
     Promise.all([getAnalysis(id), getExercises(id)])
       .then(([data, exs]) => {
         if (!cancelled) { setAnalysis(data); setExercises(exs); }

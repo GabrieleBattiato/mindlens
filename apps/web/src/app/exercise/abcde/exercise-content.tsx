@@ -116,6 +116,58 @@ function buildSteps(t: (key: TranslationKey) => string): Step[] {
   ];
 }
 
+const HELP_STEPS = [
+  { letter: "A", color: "text-blue-400", bg: "bg-blue-500/15", border: "border-blue-500/30", descKey: "exercise.help.a", exKey: "exercise.help.a.example" },
+  { letter: "B", color: "text-violet-400", bg: "bg-violet-500/15", border: "border-violet-500/30", descKey: "exercise.help.b", exKey: "exercise.help.b.example" },
+  { letter: "C", color: "text-rose-400", bg: "bg-rose-500/15", border: "border-rose-500/30", descKey: "exercise.help.c", exKey: "exercise.help.c.example" },
+  { letter: "D", color: "text-amber-400", bg: "bg-amber-500/15", border: "border-amber-500/30", descKey: "exercise.help.d", exKey: "exercise.help.d.example" },
+  { letter: "E", color: "text-emerald-400", bg: "bg-emerald-500/15", border: "border-emerald-500/30", descKey: "exercise.help.e", exKey: "exercise.help.e.example" },
+  { letter: "F", color: "text-cyan-400", bg: "bg-cyan-500/15", border: "border-cyan-500/30", descKey: "exercise.help.f", exKey: "exercise.help.f.example" },
+] as const;
+
+function HelpModal({ t, onClose }: { t: (key: TranslationKey) => string; onClose: () => void }) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <div
+        className="relative max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-2xl border border-white/10 bg-zinc-900 p-6 shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between">
+          <h2 className="text-base font-semibold text-zinc-100">{t("exercise.help.title")}</h2>
+          <button
+            type="button"
+            onClick={onClose}
+            className="flex h-7 w-7 items-center justify-center rounded-lg text-zinc-500 transition-colors hover:bg-white/8 hover:text-zinc-300"
+          >
+            &times;
+          </button>
+        </div>
+
+        <p className="mt-3 text-sm leading-relaxed text-zinc-400">
+          {t("exercise.help.intro")}
+        </p>
+
+        <div className="mt-5 space-y-4">
+          {HELP_STEPS.map((s) => (
+            <div key={s.letter} className="flex gap-3">
+              <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${s.bg} border ${s.border} text-sm font-bold ${s.color}`}>
+                {s.letter}
+              </span>
+              <div className="flex-1 space-y-1.5">
+                <p className="text-sm text-zinc-300">{t(s.descKey as TranslationKey)}</p>
+                <p className="rounded-lg bg-white/[3%] px-3 py-2 text-xs italic text-zinc-500">
+                  &ldquo;{t(s.exKey as TranslationKey)}&rdquo;
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function ABCDEExerciseContent() {
   const { t } = useI18n();
   const router = useRouter();
@@ -141,6 +193,7 @@ export function ABCDEExerciseContent() {
   ]);
   const [behaviorText, setBehaviorText] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
   const [assistLoading, setAssistLoading] = useState(false);
   const [assistResult, setAssistResult] = useState<AssistResponse | null>(null);
   const [assistError, setAssistError] = useState<string | null>(null);
@@ -314,8 +367,8 @@ export function ABCDEExerciseContent() {
         </p>
       </div>
 
-      {/* Step pills - mini nav */}
-      <div className="animate-fade-in-up stagger-2 flex gap-2">
+      {/* Step pills + help */}
+      <div className="animate-fade-in-up stagger-2 flex items-center gap-2">
         {STEPS.map((s, i) => {
           const c = STEP_COLORS[i];
           const isActive = i === currentStep;
@@ -342,7 +395,20 @@ export function ABCDEExerciseContent() {
             </button>
           );
         })}
+
+        {/* Help button */}
+        <button
+          type="button"
+          onClick={() => setHelpOpen(true)}
+          className="ml-auto flex items-center gap-1.5 rounded-xl border border-white/8 bg-white/[3%] px-3 py-2 text-xs font-medium text-zinc-500 transition-all hover:bg-white/[6%] hover:text-zinc-300"
+        >
+          <span className="text-sm">?</span>
+          {t("exercise.help")}
+        </button>
       </div>
+
+      {/* Help modal */}
+      {helpOpen && <HelpModal t={t} onClose={() => setHelpOpen(false)} />}
 
       {/* Progress bar */}
       <div className="animate-fade-in-up stagger-2">

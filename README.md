@@ -2,7 +2,7 @@
 
 **A local tool for understanding what you think and why you think it.**
 
-MindLens is not a therapy chatbot, not a journal, not a motivational coach. It's a **cognitive lens**: It helps you look at your thoughts more clearly, question them, and uncover the distortions and underlying beliefs shaping how you feel and react. Instead of telling you what to think, it shows you how your thinking works.
+MindLens is not a therapy chatbot, not a journal, not a motivational coach. It's a **cognitive lens**: it helps you look at your thoughts more clearly, question them, and uncover the distortions and underlying beliefs shaping how you feel and react. Instead of telling you what to think, it shows you how your thinking works.
 
 It uses AI models that run **100% on your machine** (via [Ollama](https://ollama.com)) — nothing leaves your computer. Your data stays in a local SQLite file. No accounts, no servers, no telemetry.
 
@@ -12,23 +12,9 @@ It uses AI models that run **100% on your machine** (via [Ollama](https://ollama
 
 ## What it does
 
-### AI-powered cognitive analysis
-
-Describe a situation that affected you — as free text or through a guided form (situation, thoughts, emotions, intensity, behavior) — and the AI returns a structured analysis:
-
-- **Clinical summary** of what you described
-- **Emotions** detected with intensity (1-10)
-- **Cognitive distortions** identified with evidence and confidence level
-- **ABC Model** (Activating Event → Belief → Consequence)
-- **Fact vs Interpretation** — what's observable vs what's an assumption
-- **Reframe** — a more balanced alternative thought
-- **Belief analysis** — core beliefs and intermediate rules (when applicable)
-- **Maintenance cycle** — how the pattern sustains itself (avoidance, rumination, etc.)
-- **Suggested CBT exercises** — concrete steps to work on what was found
-
 ### ABC Exercise
 
-A step-by-step guided cognitive restructuring exercise, based on Albert Ellis' model:
+The primary entry point. A step-by-step guided cognitive restructuring exercise based on Albert Ellis' model:
 
 | Step | What it is |
 |------|-----------|
@@ -39,15 +25,30 @@ A step-by-step guided cognitive restructuring exercise, based on Albert Ellis' m
 | **E** — Effective New Belief | A more balanced thought |
 | **F** — New Feeling | How you'd feel with that new belief |
 
-On steps D and E you can ask the AI for help: it generates Socratic questions, identifies distortions, and suggests disputations or alternative beliefs. But the idea is that you do the work first.
+On steps D and E you can ask the AI for a brief observation to help you think. But the idea is that you do the work first.
+
+When you complete the exercise, the AI processes your input in the background and generates a structured cognitive result.
+
+### AI-powered cognitive result
+
+After completing an exercise, the AI returns a structured breakdown:
+
+- **Summary** of what you described, with detected pattern tags
+- **Emotions** detected with intensity (1-10)
+- **Cognitive distortions** identified with evidence and confidence level
+- **Reframe** — a more balanced alternative thought (prominently displayed)
+- **ABC Model** — the cognitive process: trigger → automatic thought → emotional result
+- **Maintenance cycle** — how the pattern sustains itself (avoidance, rumination, etc.)
+- **Suggested exercises** — concrete next steps (behavioral experiments, exposure, etc.)
+- **Deep beliefs** — core beliefs and intermediate rules (collapsible, when detected)
 
 ### Learn section
 
-A built-in guide that explains CBT fundamentals in plain language: what it is, why it works, how the ABC model connects situations to emotions, what cognitive distortions are, and how the ABC exercise helps you intervene. Designed so anyone can understand it without prior knowledge.
+A built-in guide that explains CBT fundamentals in plain language: what it is, why it works, how the ABC model connects situations to emotions, what cognitive distortions are, and how the exercise helps you intervene. Designed so anyone can understand it without prior knowledge.
 
 ### Dashboard and patterns
 
-The dashboard shows stats from your analyses: how many you've done, your most frequent distortions, and the emotions that come up most often. This lets you spot recurring patterns over time.
+The dashboard shows stats from your entries: how many you've completed, your most frequent distortions, and the emotions that come up most often. This lets you spot recurring patterns over time.
 
 ---
 
@@ -75,7 +76,7 @@ The dashboard shows stats from your analyses: how many you've done, your most fr
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/mindlens.git
+git clone https://github.com/GabrieleBattiato/mindlens.git
 cd mindlens
 ```
 
@@ -92,36 +93,28 @@ ollama serve
 ollama pull qwen3:8b
 ```
 
-### 3. Start the app
+### 3. API
 
 ```bash
-./dev.sh
-```
-
-This script installs dependencies and starts both the API (port 8000) and the web app (port 3000) in a single command.
-
-<details>
-<summary>Manual setup (alternative)</summary>
-
-```bash
-# API
 cd apps/api
 python -m venv .venv
 source .venv/bin/activate   # On Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-uvicorn app.main:app --reload --port 8000
-
-# Web (separate terminal)
-cd apps/web
-npm install
-npm run dev
+uvicorn app.main:app --reload --port 4000
 ```
 
-</details>
+### 4. Web
 
-### 4. Open the app
+```bash
+cd apps/web
+npm install
+npm run build
+npm start -- --port 4001
+```
 
-Go to [http://localhost:3000](http://localhost:3000)
+### 5. Open the app
+
+Go to [http://localhost:4001](http://localhost:4001)
 
 ---
 
@@ -133,20 +126,19 @@ By default MindLens connects to Ollama at `http://localhost:11434` with the `qwe
 CBD_OLLAMA_BASE_URL=http://localhost:11434
 CBD_OLLAMA_MODEL=qwen3:8b
 CBD_LLM_TEMPERATURE=0.3
-CBD_LLM_MAX_TOKENS=4096
+CBD_LLM_MAX_TOKENS=8192
 CBD_DATABASE_URL=sqlite:///./mindlens.db
 ```
 
 ### Compatible models
 
-Any model that runs on Ollama should work.
-Larger models (13B+) need more RAM/VRAM but tend to produce more precise results.
+Any model that runs on Ollama should work. The quality of the result depends on the model — larger models (13B+) tend to produce more precise and nuanced output.
 
 ---
 
 ## Languages
 
-The interface is available in **Spanish** and **English**. You can switch languages from the **Settings** page. AI analysis output is always generated in Spanish.
+The interface is available in **Spanish** and **English**. You can switch languages from the **Settings** page. AI output is always generated in Spanish.
 
 ---
 
@@ -173,8 +165,7 @@ mindlens/
 │       │   ├── components/      # UI components
 │       │   └── lib/             # API client, types, i18n, utils
 │       └── package.json
-├── .env.example
-└── dev.sh                       # Script to start both apps
+└── .env.example
 ```
 
 ---
@@ -196,9 +187,8 @@ If this is your first time with Cognitive Behavioral Therapy, here's a quick glo
 |---------|--------------|
 | **Cognitive distortion** | An automatic thinking pattern that distorts how you interpret reality. It's not an "error" — it's a mental shortcut we all have, but that sometimes works against us. Examples: all-or-nothing thinking, catastrophizing, mind reading. |
 | **ABC Model** | Albert Ellis' model: **A** (activating event) → **B** (belief/thought) → **C** (emotional/behavioral consequence). The core idea is that it's not the situation that generates the emotion, but what you think about it. |
-| **Fact vs Interpretation** | Separating what objectively happened (what a camera would record) from what you assumed, inferred, or interpreted. |
 | **Reframe** | An alternative thought that doesn't deny what you feel, but looks at it from a more balanced, evidence-based angle. |
-| **Core belief** | A deep belief about yourself, others, or the world (e.g., "I'm not enough", "people will reject me"). It doesn't always appear — only when the analysis detects it. |
+| **Core belief** | A deep belief about yourself, others, or the world (e.g., "I'm not enough", "people will reject me"). It doesn't always appear — only when detected. |
 | **Maintenance cycle** | The mechanism by which a pattern sustains itself over time: avoidance, rumination, reassurance seeking, etc. |
 | **Disputation (D)** | Challenging a belief as if it were a hypothesis: looking for evidence for and against, considering other explanations. |
 
