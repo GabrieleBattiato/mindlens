@@ -7,14 +7,14 @@ export const translations = {
     // Home
     "home.title": "MindLens",
     "home.subtitle":
-      "Analiza tus pensamientos, identifica distorsiones cognitivas y construi creencias mas saludables con ejercicios guiados.",
+      "Examina tus pensamientos, identifica distorsiones cognitivas y construi creencias mas saludables con ejercicios guiados.",
     "home.abcdef": "Ejercicio ABC",
     "home.abcdefDesc":
       "Reestructuracion cognitiva paso a paso, sin IA. Vos guias el proceso.",
     "home.history": "Ver Historial",
     "home.historyDesc":
-      "Revisa tus analisis anteriores, observa patrones y tu progreso.",
-    "home.stats.analyses": "Analisis",
+      "Revisa tus registros anteriores, observa patrones y tu progreso.",
+    "home.stats.analyses": "Registros",
     "home.stats.completed": "Completados",
     "home.stats.exercises": "Ejercicios",
     "home.topDistortions": "Top Distorsiones",
@@ -131,49 +131,27 @@ export const translations = {
       "MindLens es un proyecto personal que quise compartir. No pretende reemplazar nada ni ser la solucion definitiva. Lo que hace es darte una forma practica y visual de hacer los ejercicios, con un modelo de IA local que te ayuda a identificar distorsiones, separar hechos de interpretaciones y elaborar las disputas si lo necesitas. El trabajo lo haces vos — la herramienta te acompana, te ayuda a mantener trazabilidad, y te da estructura para ver con mas claridad.",
     "about.modelQuality.title": "Sobre el modelo de IA",
     "about.modelQuality.p1":
-      "La calidad del analisis depende en gran parte del modelo que elijas usar. Modelos mas grandes (13B+) tienden a producir analisis mas precisos y matizados, mientras que modelos mas chicos son mas rapidos pero pueden ser menos detallados.",
+      "La calidad del resultado depende en gran parte del modelo que elijas usar. Modelos mas grandes (13B+) tienden a producir resultados mas precisos y matizados, mientras que modelos mas chicos son mas rapidos pero pueden ser menos detallados.",
     "about.modelQuality.p2":
-      "Podes cambiar el modelo en cualquier momento desde Configuracion. Si un analisis no te convence, podes re-analizarlo desde el Historial con otro modelo para comparar resultados.",
+      "Podes cambiar el modelo en cualquier momento desde Configuracion. Si un resultado no te convence, podes reprocesarlo desde el Historial con otro modelo para comparar.",
     "about.disclaimer":
       "MindLens es una herramienta de autoexploracion basada en conceptos de terapia cognitivo-conductual. No reemplaza la atencion profesional de salud mental. Si estas atravesando una crisis, busca ayuda profesional.",
 
-    // New Analysis
-    "analysis.new.title": "Que paso?",
-    "analysis.new.subtitle": "Elegi como preferis describir lo que te pasa",
-    "analysis.new.situation": "Situacion",
-    "analysis.new.situationPlaceholder":
-      "Que paso? Describe el evento o disparador...",
-    "analysis.new.thoughts": "Pensamientos",
-    "analysis.new.thoughtsPlaceholder":
-      "Que pensamientos te vinieron a la cabeza?",
-    "analysis.new.emotions": "Emociones",
-    "analysis.new.emotionsPlaceholder": "ej. ansiedad, frustracion, tristeza",
-    "analysis.new.intensity": "Intensidad",
-    "analysis.new.behaviors": "Conductas",
-    "analysis.new.behaviorsPlaceholder": "Como reaccionaste? Que hiciste?",
-    "analysis.new.optional": "(opcional)",
-    "analysis.new.analyze": "Analizar",
-    "analysis.new.analyzing": "Analizando...",
-    "analysis.new.error": "No se pudo crear el analisis",
-    "analysis.new.ollamaUnreachable": "No se puede conectar a Ollama. Asegurate de que este corriendo:",
-    "analysis.new.modelNotFound": "El modelo no esta disponible. Descargalo con:",
-
     // Analysis Result
-    "result.title": "Resultado del Analisis",
-    "result.failed": "El analisis fallo",
-    "result.processing": "Analizando tu pensamiento...",
-    "result.pending": "En cola, se procesara pronto...",
-    "result.refresh": "Recarga la pagina para ver actualizaciones.",
+    "result.title": "Una mirada mas clara",
+    "result.failed": "No se pudo procesar",
+    "result.ready": "Tu resultado esta listo",
+    "result.processing.0": "Mirando mas de cerca...",
+    "result.processing.1": "Notando algunos patrones...",
+    "result.processing.2": "Buscando debajo de la superficie...",
+    "result.processing.3": "Armando todo...",
     "result.summary": "Resumen",
-    "result.factVsInterpretation": "Hecho vs Interpretacion",
-    "result.facts": "Hechos",
-    "result.interpretations": "Interpretaciones",
     "result.abcModel": "Modelo ABC",
     "result.activatingEvent": "Evento Activador",
     "result.belief": "Creencia",
     "result.consequence": "Consecuencia",
     "result.distortions": "Distorsiones Cognitivas",
-    "result.beliefAnalysis": "Analisis de Creencias",
+    "result.beliefAnalysis": "Creencias profundas",
     "result.coreBelief": "Creencia Central",
     "result.intermediateRules": "Reglas Intermedias",
     "result.evidenceFor": "Evidencia a Favor",
@@ -196,28 +174,28 @@ export const translations = {
     "result.whatKeepsItGoing": "Que mantiene el ciclo",
     "result.suggestedExercise": "Ejercicio sugerido",
     "result.moreExercises": "Mas ejercicios",
-    "result.deeperAnalysis": "Analisis profundo",
+    "result.deeperAnalysis": "Profundizar",
     "result.showMore": "Ver mas",
     "result.showLess": "Ver menos",
     "result.clarification.title": "Necesito más contexto",
     "result.clarification.subtitle": "Respondé las preguntas que apliquen para un análisis más preciso:",
     "result.clarification.placeholder": "Agregá el contexto que falta...",
-    "result.clarification.reanalyze": "Re-analizar con contexto",
+    "result.clarification.reanalyze": "Reprocesar con contexto",
     "result.clarification.reanalyzing": "Re-analizando...",
 
     // History
     "history.title": "Historial",
-    "history.subtitle": "Tus analisis cognitivos anteriores",
-    "history.empty": "Sin analisis todavia",
+    "history.subtitle": "Tus registros anteriores",
+    "history.empty": "Sin registros todavia",
     "history.emptyDesc":
-      "Crea tu primer analisis cognitivo para comenzar a explorar tus patrones de pensamiento.",
-    "history.createFirst": "Crear primer analisis",
-    "history.deleteConfirm": "Eliminar este analisis?",
+      "Completa tu primer ejercicio ABC para comenzar a explorar tus patrones de pensamiento.",
+    "history.createFirst": "Hacer un ejercicio ABC",
+    "history.deleteConfirm": "Eliminar este registro?",
     "history.deleteCancel": "Cancelar",
     "history.deleteAction": "Eliminar",
-    "history.deleted": "Analisis eliminado",
+    "history.deleted": "Registro eliminado",
     "history.deleteError": "Error al eliminar",
-    "history.reanalyze": "Re-analizar",
+    "history.reanalyze": "Reprocesar",
     "history.retryError": "No se pudo re-analizar",
     "history.loadError": "Error al cargar el historial",
     "history.statusCompleted": "Completado",
@@ -234,7 +212,7 @@ export const translations = {
     "exercise.previous": "Anterior",
     "exercise.next": "Siguiente",
     "exercise.complete": "Completar",
-    "exercise.saving": "Guardando...",
+    "exercise.saving": "Analizando...",
     "exercise.saveError": "Error al guardar el ejercicio",
     "exercise.hints": "Preguntas para guiarte",
     "exercise.a.label": "Evento Activador",
@@ -252,6 +230,7 @@ export const translations = {
       "\u00bfCuales fueron las consecuencias emocionales y conductuales?",
     "exercise.c.placeholder":
       "\u00bfComo te sentiste? \u00bfQue hiciste como resultado?",
+    "exercise.c.intensity": "Intensidad",
     "exercise.c.emotionPlaceholder": "ej: miedo",
     "exercise.c.addEmotion": "Agregar emoción",
     "exercise.c.behaviorLabel": "Conducta",
@@ -312,7 +291,7 @@ export const translations = {
     // Settings
     "settings.title": "Configuracion",
     "settings.subtitle":
-      "Elegi el modelo de IA para los analisis cognitivos",
+      "Elegi el modelo de IA para procesar tus ejercicios",
     "settings.model": "Modelo",
     "settings.ollamaUrl": "Ollama URL",
     "settings.save": "Guardar cambios",
@@ -356,9 +335,9 @@ export const translations = {
 
     // Info tooltips — dashboard
     "info.topDistortions":
-      "Las distorsiones cognitivas que mas aparecen en tus analisis. Si una aparece muchas veces, puede ser un patron automatico al que prestar atencion.",
+      "Las distorsiones cognitivas que mas aparecen en tus registros. Si una aparece muchas veces, puede ser un patron automatico al que prestar atencion.",
     "info.topEmotions":
-      "Las emociones que mas se repiten en tus analisis. Te ayuda a ver que estados emocionales aparecen con mayor frecuencia.",
+      "Las emociones que mas se repiten en tus registros. Te ayuda a ver que estados emocionales aparecen con mayor frecuencia.",
 
     // Info tooltips — analysis modes
     "info.freeMode":
@@ -375,14 +354,14 @@ export const translations = {
     // Home
     "home.title": "MindLens",
     "home.subtitle":
-      "Analyze your thoughts, identify cognitive distortions and build healthier beliefs with guided exercises.",
+      "Examine your thoughts, identify cognitive distortions and build healthier beliefs with guided exercises.",
     "home.abcdef": "ABC Exercise",
     "home.abcdefDesc":
       "Step-by-step cognitive restructuring, no AI. You guide the process.",
     "home.history": "View History",
     "home.historyDesc":
-      "Review your past analyses, observe patterns and track your progress.",
-    "home.stats.analyses": "Analyses",
+      "Review your past entries, observe patterns and track your progress.",
+    "home.stats.analyses": "Entries",
     "home.stats.completed": "Completed",
     "home.stats.exercises": "Exercises",
     "home.topDistortions": "Top Distortions",
@@ -499,49 +478,27 @@ export const translations = {
       "MindLens is a personal project I wanted to share. It doesn't aim to replace anything or be the ultimate solution. What it does is give you a practical, visual way to do the exercises, with a local AI model that helps you identify distortions, separate facts from interpretations, and work through disputations if you need it. You do the work — the tool accompanies you, helps you keep track, and gives you structure to see more clearly.",
     "about.modelQuality.title": "About the AI model",
     "about.modelQuality.p1":
-      "The quality of the analysis depends largely on the model you choose to use. Larger models (13B+) tend to produce more precise and nuanced analyses, while smaller models are faster but may be less detailed.",
+      "The quality of the result depends largely on the model you choose to use. Larger models (13B+) tend to produce more precise and nuanced results, while smaller models are faster but may be less detailed.",
     "about.modelQuality.p2":
-      "You can change the model at any time from Settings. If an analysis doesn't convince you, you can re-analyze it from History with a different model to compare results.",
+      "You can change the model at any time from Settings. If a result doesn't convince you, you can reprocess it from History with a different model to compare.",
     "about.disclaimer":
       "MindLens is a self-exploration tool based on cognitive behavioral therapy concepts. It does not replace professional mental health care. If you are going through a crisis, please seek professional help.",
 
-    // New Analysis
-    "analysis.new.title": "What happened?",
-    "analysis.new.subtitle":
-      "Choose how you prefer to describe what's going on",
-    "analysis.new.situation": "Situation",
-    "analysis.new.situationPlaceholder":
-      "What happened? Describe the event or trigger...",
-    "analysis.new.thoughts": "Thoughts",
-    "analysis.new.thoughtsPlaceholder": "What thoughts came to your mind?",
-    "analysis.new.emotions": "Emotions",
-    "analysis.new.emotionsPlaceholder": "e.g. anxiety, frustration, sadness",
-    "analysis.new.intensity": "Intensity",
-    "analysis.new.behaviors": "Behaviors",
-    "analysis.new.behaviorsPlaceholder": "How did you react? What did you do?",
-    "analysis.new.optional": "(optional)",
-    "analysis.new.analyze": "Analyze",
-    "analysis.new.analyzing": "Analyzing...",
-    "analysis.new.error": "Could not create analysis",
-    "analysis.new.ollamaUnreachable": "Cannot connect to Ollama. Make sure it is running:",
-    "analysis.new.modelNotFound": "The model is not available. Download it with:",
-
     // Analysis Result
-    "result.title": "Analysis Result",
-    "result.failed": "Analysis failed",
-    "result.processing": "Analyzing your thought...",
-    "result.pending": "Queued, will be processed soon...",
-    "result.refresh": "Refresh the page to check for updates.",
+    "result.title": "A clearer view",
+    "result.failed": "Could not process",
+    "result.ready": "Your result is ready",
+    "result.processing.0": "Taking a closer look...",
+    "result.processing.1": "Noticing some patterns...",
+    "result.processing.2": "Looking beneath the surface...",
+    "result.processing.3": "Putting it all together...",
     "result.summary": "Summary",
-    "result.factVsInterpretation": "Fact vs Interpretation",
-    "result.facts": "Facts",
-    "result.interpretations": "Interpretations",
     "result.abcModel": "ABC Model",
     "result.activatingEvent": "Activating Event",
     "result.belief": "Belief",
     "result.consequence": "Consequence",
     "result.distortions": "Cognitive Distortions",
-    "result.beliefAnalysis": "Belief Analysis",
+    "result.beliefAnalysis": "Deep beliefs",
     "result.coreBelief": "Core Belief",
     "result.intermediateRules": "Intermediate Rules",
     "result.evidenceFor": "Evidence For",
@@ -564,28 +521,28 @@ export const translations = {
     "result.whatKeepsItGoing": "What keeps the cycle going",
     "result.suggestedExercise": "Suggested exercise",
     "result.moreExercises": "More exercises",
-    "result.deeperAnalysis": "Deeper analysis",
+    "result.deeperAnalysis": "Go deeper",
     "result.showMore": "Show more",
     "result.showLess": "Show less",
     "result.clarification.title": "I need more context",
-    "result.clarification.subtitle": "Answer the questions below for a more accurate analysis:",
+    "result.clarification.subtitle": "Answer the questions below for a more accurate result:",
     "result.clarification.placeholder": "Add the missing context...",
-    "result.clarification.reanalyze": "Re-analyze with context",
+    "result.clarification.reanalyze": "Reprocess with context",
     "result.clarification.reanalyzing": "Re-analyzing...",
 
     // History
     "history.title": "History",
-    "history.subtitle": "Your past cognitive analyses",
-    "history.empty": "No analyses yet",
+    "history.subtitle": "Your past entries",
+    "history.empty": "No entries yet",
     "history.emptyDesc":
-      "Create your first cognitive analysis to start exploring your thought patterns.",
-    "history.createFirst": "Create first analysis",
-    "history.deleteConfirm": "Delete this analysis?",
+      "Complete your first ABC exercise to start exploring your thought patterns.",
+    "history.createFirst": "Do an ABC exercise",
+    "history.deleteConfirm": "Delete this entry?",
     "history.deleteCancel": "Cancel",
     "history.deleteAction": "Delete",
-    "history.deleted": "Analysis deleted",
+    "history.deleted": "Entry deleted",
     "history.deleteError": "Error deleting",
-    "history.reanalyze": "Re-analyze",
+    "history.reanalyze": "Reprocess",
     "history.retryError": "Could not re-analyze",
     "history.loadError": "Error loading history",
     "history.statusCompleted": "Completed",
@@ -602,7 +559,7 @@ export const translations = {
     "exercise.previous": "Previous",
     "exercise.next": "Next",
     "exercise.complete": "Complete",
-    "exercise.saving": "Saving...",
+    "exercise.saving": "Analyzing...",
     "exercise.saveError": "Error saving exercise",
     "exercise.hints": "Guiding questions",
     "exercise.a.label": "Activating Event",
@@ -617,6 +574,7 @@ export const translations = {
       "What were the emotional and behavioral consequences?",
     "exercise.c.placeholder":
       "How did you feel? What did you do as a result?",
+    "exercise.c.intensity": "Intensity",
     "exercise.c.emotionPlaceholder": "e.g.: fear",
     "exercise.c.addEmotion": "Add emotion",
     "exercise.c.behaviorLabel": "Behavior",
@@ -666,7 +624,7 @@ export const translations = {
 
     // Settings
     "settings.title": "Settings",
-    "settings.subtitle": "Choose the AI model for cognitive analyses",
+    "settings.subtitle": "Choose the AI model for processing your exercises",
     "settings.model": "Model",
     "settings.ollamaUrl": "Ollama URL",
     "settings.save": "Save changes",
@@ -710,15 +668,15 @@ export const translations = {
 
     // Info tooltips — dashboard
     "info.topDistortions":
-      "The cognitive distortions that appear most in your analyses. If one shows up often, it might be an automatic pattern worth paying attention to.",
+      "The cognitive distortions that appear most in your entries. If one shows up often, it might be an automatic pattern worth paying attention to.",
     "info.topEmotions":
-      "The emotions that repeat most across your analyses. Helps you see which emotional states come up most frequently.",
+      "The emotions that repeat most across your entries. Helps you see which emotional states come up most frequently.",
 
     // Info tooltips — analysis modes
     "info.freeMode":
       "Write what's going on in your own words, no structure needed. The AI handles identifying the situation, thoughts, emotions, and everything else.",
     "info.guidedMode":
-      "Fill in each field step by step: situation, thoughts, emotions, intensity, and behavior. Gives the AI more precision for the analysis.",
+      "Fill in each field step by step: situation, thoughts, emotions, intensity, and behavior. Gives the AI more precision when processing.",
 
   },
 } as const;

@@ -1,6 +1,6 @@
 import json
 
-from fastapi import APIRouter, Depends, Query, Request
+from fastapi import APIRouter, BackgroundTasks, Depends, Query, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database import get_db
@@ -13,6 +13,7 @@ from app.services.analysis_service import (
     get_analysis,
     list_analyses,
     retry_analysis,
+    run_analysis,
 )
 
 router = APIRouter(prefix="/api/analyses", tags=["analyses"])
@@ -46,16 +47,20 @@ def _to_response(analysis: Analysis) -> AnalysisResponse:
         status=analysis.status,
         result_json=result,
         error_message=analysis.error_message,
+        model_used=analysis.model_used,
+        duration_seconds=analysis.duration_seconds,
     )
 
 
 @router.post("", response_model=AnalysisResponse)
 async def create_analysis_endpoint(
     data: AnalysisCreate,
+    background_tasks: BackgroundTasks,
     provider: LLMProvider = Depends(get_provider),
     db: AsyncSession = Depends(get_db),
 ):
     analysis = await create_analysis(db, data, provider)
+    background_tasks.add_task(run_analysis, analysis.id, provider)
     return _to_response(analysis)
 
 
@@ -91,11 +96,12 @@ async def get_analysis_endpoint(
 @router.post("/{analysis_id}/retry", response_model=AnalysisResponse)
 async def retry_analysis_endpoint(
     analysis_id: str,
-    request: Request,
+    background_tasks: BackgroundTasks,
     provider: LLMProvider = Depends(get_provider),
     db: AsyncSession = Depends(get_db),
 ):
     analysis = await retry_analysis(db, analysis_id, provider)
+    background_tasks.add_task(run_analysis, analysis.id, provider)
     return _to_response(analysis)
 
 

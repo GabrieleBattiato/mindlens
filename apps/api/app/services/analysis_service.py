@@ -1,11 +1,14 @@
 import json
 import logging
+import time
 from datetime import datetime, timezone
 
 from pydantic import ValidationError
 from sqlalchemy import asc, desc, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.config import settings
+from app.database import AsyncSessionLocal
 from app.exceptions import AnalysisNotFoundError
 from app.models.analysis import Analysis
 from app.providers.base import LLMProvider
@@ -31,9 +34,8 @@ async def create_analysis(
     data: AnalysisCreate,
     provider: LLMProvider,
 ) -> Analysis:
-    """Create an analysis record, run LLM analysis, and return the result."""
+    """Create an analysis record and return it immediately (status=processing)."""
 
-    # Build the Analysis model from the discriminated union input
     if isinstance(data, AnalysisCreateFreeMode):
         analysis = Analysis(
             input_mode="free",
@@ -41,7 +43,6 @@ async def create_analysis(
             status="processing",
         )
     else:
-        # Guided mode: concatenate fields into raw_input for storage
         raw_input = (
             f"Situation: {data.situation}\n"
             f"Thoughts: {data.thoughts}\n"
@@ -61,48 +62,54 @@ async def create_analysis(
         )
 
     db.add(analysis)
-    await db.flush()  # get the id assigned
-
-    # Build prompts
-    system_prompt = prompt_builder.build_system_prompt(strict=False)
-    if isinstance(data, AnalysisCreateFreeMode):
-        user_prompt = prompt_builder.build_user_prompt(
-            mode="free",
-            raw_input=data.raw_input,
-        )
-    else:
-        user_prompt = prompt_builder.build_user_prompt(
-            mode="guided",
-            raw_input=analysis.raw_input,
-            situation=data.situation,
-            thoughts=data.thoughts,
-            emotions=data.emotions,
-            intensity=data.intensity,
-            behaviors=data.behaviors,
-        )
-
-    # Attempt LLM call + parse
-    result = await _call_and_parse(provider, system_prompt, user_prompt)
-
-    if result is None:
-        # Retry with strict prompt
-        logger.info("First attempt failed for analysis %s, retrying with strict prompt", analysis.id)
-        result = await _retry_strict(provider, user_prompt)
-
-    if result is None:
-        analysis.status = "failed"
-        analysis.error_message = "LLM returned invalid output after retry"
-        analysis.updated_at = datetime.now(timezone.utc)
-        await db.commit()
-        await db.refresh(analysis)
-        return analysis
-
-    analysis.result_json = result.model_dump_json()
-    analysis.status = "completed"
-    analysis.updated_at = datetime.now(timezone.utc)
     await db.commit()
     await db.refresh(analysis)
     return analysis
+
+
+async def run_analysis(analysis_id: str, provider: LLMProvider) -> None:
+    """Run LLM analysis in a background task. Uses its own DB session."""
+    async with AsyncSessionLocal() as db:
+        analysis = await get_analysis(db, analysis_id)
+
+        # Build prompts
+        system_prompt = prompt_builder.build_system_prompt(strict=False)
+        if analysis.input_mode == "free":
+            user_prompt = prompt_builder.build_user_prompt(
+                mode="free",
+                raw_input=analysis.raw_input,
+            )
+        else:
+            user_prompt = prompt_builder.build_user_prompt(
+                mode="guided",
+                raw_input=analysis.raw_input,
+                situation=analysis.guided_situation or "",
+                thoughts=analysis.guided_thoughts or "",
+                emotions=analysis.guided_emotions or "",
+                intensity=analysis.guided_intensity or 5,
+                behaviors=analysis.guided_behaviors,
+            )
+
+        t0 = time.monotonic()
+        result = await _call_and_parse(provider, system_prompt, user_prompt)
+
+        if result is None:
+            logger.info("First attempt failed for analysis %s, retrying with strict prompt", analysis.id)
+            result = await _retry_strict(provider, user_prompt)
+
+        elapsed = round(time.monotonic() - t0, 2)
+        analysis.model_used = settings.ollama_model
+        analysis.duration_seconds = elapsed
+
+        if result is None:
+            analysis.status = "failed"
+            analysis.error_message = "LLM returned invalid output after retry"
+        else:
+            analysis.result_json = result.model_dump_json()
+            analysis.status = "completed"
+
+        analysis.updated_at = datetime.now(timezone.utc)
+        await db.commit()
 
 
 async def _call_and_parse(
@@ -149,48 +156,21 @@ async def retry_analysis(
     analysis_id: str,
     provider: LLMProvider,
 ) -> Analysis:
-    """Reset a failed analysis and re-run it with the original input."""
+    """Reset an analysis and re-run it. Returns immediately, runs LLM in background."""
     analysis = await get_analysis(db, analysis_id)
 
     analysis.status = "processing"
     analysis.result_json = None
     analysis.error_message = None
     analysis.updated_at = datetime.now(timezone.utc)
-    await db.flush()
-
-    system_prompt = prompt_builder.build_system_prompt(strict=False)
-    if analysis.input_mode == "free":
-        user_prompt = prompt_builder.build_user_prompt(
-            mode="free",
-            raw_input=analysis.raw_input,
-        )
-    else:
-        user_prompt = prompt_builder.build_user_prompt(
-            mode="guided",
-            raw_input=analysis.raw_input,
-            situation=analysis.guided_situation or "",
-            thoughts=analysis.guided_thoughts or "",
-            emotions=analysis.guided_emotions or "",
-            intensity=analysis.guided_intensity or 5,
-            behaviors=analysis.guided_behaviors,
-        )
-
-    result = await _call_and_parse(provider, system_prompt, user_prompt)
-
-    if result is None:
-        result = await _retry_strict(provider, user_prompt)
-
-    if result is None:
-        analysis.status = "failed"
-        analysis.error_message = "LLM returned invalid output after retry"
-    else:
-        analysis.result_json = result.model_dump_json()
-        analysis.status = "completed"
-
-    analysis.updated_at = datetime.now(timezone.utc)
     await db.commit()
     await db.refresh(analysis)
     return analysis
+
+
+async def run_retry(analysis_id: str, provider: LLMProvider) -> None:
+    """Run retry in background — same logic as run_analysis."""
+    await run_analysis(analysis_id, provider)
 
 
 async def get_analysis(db: AsyncSession, analysis_id: str) -> Analysis:

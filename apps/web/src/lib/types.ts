@@ -82,6 +82,8 @@ export interface AnalysisResponse {
   status: "pending" | "processing" | "completed" | "failed";
   result_json: LLMAnalysisResult | null;
   error_message: string | null;
+  model_used: string | null;
+  duration_seconds: number | null;
 }
 
 export interface PatternItem {

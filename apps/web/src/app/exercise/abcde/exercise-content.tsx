@@ -423,7 +423,7 @@ export function ABCDEExerciseContent() {
                         </button>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="text-[10px] uppercase tracking-widest text-zinc-600">{t("analysis.new.intensity")}</span>
+                        <span className="text-[10px] uppercase tracking-widest text-zinc-600">{t("exercise.c.intensity")}</span>
                         <span className="text-xs font-semibold text-zinc-400">{entry.intensity}/10</span>
                       </div>
                       <Slider

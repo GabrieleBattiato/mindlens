@@ -62,12 +62,13 @@ You must output a single JSON object with these fields:
   }
 
   "cbt_exercises": [{
-    "type": string         — Category (e.g., "thought_record", "behavioral_experiment", "exposure", "cognitive_restructuring", "behavioral_activation", "decatastrophizing")
+    "type": string         — Category (e.g., "behavioral_experiment", "exposure", "behavioral_activation", "decatastrophizing", "graded_task", "mindfulness", "worry_time", "cost_benefit_analysis", "role_play", "activity_scheduling")
     "title": string        — Short title for the exercise
     "description": string  — What this exercise involves and why it is relevant to this case
     "steps": [string]      — Concrete step-by-step instructions (at least 2 steps)
   }]
     At least 1 exercise required. Choose exercises that directly address the identified distortions and maintenance cycle.
+    IMPORTANT: Do NOT suggest "cognitive_restructuring" or "thought_record" exercises — the user has already completed a structured ABC cognitive restructuring exercise before reaching this analysis. Suggest complementary exercises instead: behavioral experiments, exposure, activation, decatastrophizing, mindfulness, etc.
 
   "pattern_hints": [string]
     Tags for cross-entry pattern detection. Use lowercase, descriptive terms (e.g., "perfectionism", "social_evaluation", "control", "self_worth_contingent_on_performance", "catastrophizing_about_health"). These help identify recurring themes across multiple entries.

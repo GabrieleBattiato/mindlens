@@ -128,7 +128,7 @@ function EmptyState() {
 
         <div className="mt-6">
           <Button
-            render={<Link href="/analysis/new" />}
+            render={<Link href="/exercise/abcde" />}
             className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-indigo-400 hover:to-purple-400 border-0 px-5 py-2 h-9 font-medium shadow-lg shadow-indigo-500/20"
           >
             {t("history.createFirst")}
@@ -253,6 +253,19 @@ export default function HistoryPage() {
                       ? truncate(a.result_json.summary, 120)
                       : truncate(a.raw_input, 120)}
                   </p>
+
+                  {/* Model + duration */}
+                  {(a.model_used || a.duration_seconds) && (
+                    <div className="mt-3 flex items-center gap-2 text-[10px] text-zinc-600">
+                      {a.model_used && (
+                        <span className="font-mono">{a.model_used}</span>
+                      )}
+                      {a.model_used && a.duration_seconds && <span>&middot;</span>}
+                      {a.duration_seconds != null && (
+                        <span>{a.duration_seconds < 60 ? `${Math.round(a.duration_seconds)}s` : `${Math.floor(a.duration_seconds / 60)}m ${Math.round(a.duration_seconds % 60)}s`}</span>
+                      )}
+                    </div>
+                  )}
 
                 </div>
               </Link>

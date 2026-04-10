@@ -37,5 +37,7 @@ class AnalysisResponse(BaseModel):
     status: str
     result_json: dict | None = None  # parsed JSON, not string
     error_message: str | None = None
+    model_used: str | None = None
+    duration_seconds: float | None = None
 
     model_config = {"from_attributes": True}

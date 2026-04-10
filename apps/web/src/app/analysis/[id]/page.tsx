@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -345,9 +345,8 @@ function DeepDiveSection({ result, t }: { result: LLMAnalysisResult; t: TFn }) {
   const [open, setOpen] = useState(false);
 
   const hasBeliefs = !!result.belief_analysis;
-  const hasFacts = result.fact_vs_interpretation.facts.length > 0 || result.fact_vs_interpretation.interpretations.length > 0;
 
-  if (!hasBeliefs && !hasFacts) return null;
+  if (!hasBeliefs) return null;
 
   return (
     <section className="space-y-4">
@@ -364,35 +363,6 @@ function DeepDiveSection({ result, t }: { result: LLMAnalysisResult; t: TFn }) {
 
       {open && (
         <div className="space-y-5">
-          {/* Fact vs Interpretation */}
-          {hasFacts && (
-            <div className="glass-card p-6">
-              <h3 className="text-sm font-semibold text-zinc-100">{t("result.factVsInterpretation")}</h3>
-              <div className="mt-4 grid gap-5 sm:grid-cols-2">
-                <div>
-                  <span className="text-[10px] font-semibold uppercase tracking-widest text-zinc-500">{t("result.facts")}</span>
-                  <ul className="mt-2 space-y-1.5">
-                    {result.fact_vs_interpretation.facts.map((fact, i) => (
-                      <li key={i} className="flex gap-2 text-sm text-zinc-300">
-                        <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-slate-400" />{fact}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <span className="text-[10px] font-semibold uppercase tracking-widest text-zinc-500">{t("result.interpretations")}</span>
-                  <ul className="mt-2 space-y-1.5">
-                    {result.fact_vs_interpretation.interpretations.map((interp, i) => (
-                      <li key={i} className="flex gap-2 text-sm italic text-zinc-500">
-                        <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-slate-600" />{interp}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-          )}
-
           {/* Belief Analysis */}
           {hasBeliefs && (
             <div className="glass-card p-6">
@@ -525,6 +495,33 @@ function LoadingSkeleton() {
   );
 }
 
+const PROCESSING_KEYS = [
+  "result.processing.0",
+  "result.processing.1",
+  "result.processing.2",
+  "result.processing.3",
+] as const;
+
+function ProcessingSpinner({ t }: { t: TFn }) {
+  const [msgIdx, setMsgIdx] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setMsgIdx((prev) => (prev + 1) % PROCESSING_KEYS.length);
+    }, 10000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="glass-card flex flex-col items-center justify-center p-14 text-center">
+      <div className="mb-4 h-8 w-8 animate-spin rounded-full border-2 border-cyan-500/30 border-t-cyan-400" />
+      <p className="text-sm text-zinc-400 transition-opacity duration-300">
+        {t(PROCESSING_KEYS[msgIdx])}
+      </p>
+    </div>
+  );
+}
+
 // ─── Main page ───────────────────────────────────────────────────────────────
 
 export default function AnalysisResultPage() {
@@ -544,6 +541,9 @@ export default function AnalysisResultPage() {
     router.push(`/analysis/${newAnalysis.id}`);
   }, [analysis, router]);
 
+  const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // Initial fetch
   useEffect(() => {
     if (!id) return;
     let cancelled = false;
@@ -558,6 +558,33 @@ export default function AnalysisResultPage() {
       .finally(() => { if (!cancelled) setLoading(false); });
     return () => { cancelled = true; };
   }, [id]);
+
+  // Poll while processing
+  useEffect(() => {
+    if (!analysis || (analysis.status !== "processing" && analysis.status !== "pending")) {
+      if (pollRef.current) { clearInterval(pollRef.current); pollRef.current = null; }
+      return;
+    }
+
+    if (typeof Notification !== "undefined" && Notification.permission === "default") {
+      Notification.requestPermission();
+    }
+
+    pollRef.current = setInterval(async () => {
+      try {
+        const updated = await getAnalysis(analysis.id);
+        setAnalysis(updated);
+        if (updated.status !== "processing" && updated.status !== "pending") {
+          if (pollRef.current) clearInterval(pollRef.current);
+          if (document.hidden && updated.status === "completed") {
+            new Notification("MindLens", { body: t("result.ready") });
+          }
+        }
+      } catch { /* ignore poll errors */ }
+    }, 3000);
+
+    return () => { if (pollRef.current) clearInterval(pollRef.current); };
+  }, [analysis?.id, analysis?.status]);
 
   if (loading) return <LoadingSkeleton />;
 
@@ -594,13 +621,7 @@ export default function AnalysisResultPage() {
           <h1 className="text-3xl font-bold"><span className="gradient-text">{t("result.title")}</span></h1>
           <p className="mt-2 text-sm text-zinc-400">{formatDate(analysis.created_at)}</p>
         </div>
-        <div className="glass-card flex flex-col items-center justify-center p-14 text-center">
-          <div className="mb-4 h-8 w-8 animate-spin rounded-full border-2 border-cyan-500/30 border-t-cyan-400" />
-          <p className="text-sm text-zinc-400">
-            {analysis.status === "processing" ? t("result.processing") : t("result.pending")}
-          </p>
-          <p className="mt-2 text-xs text-zinc-600">{t("result.refresh")}</p>
-        </div>
+        <ProcessingSpinner t={t} />
       </div>
     );
   }
